@@ -560,11 +560,11 @@
 
         .showcase-image {
             position: relative;
-            border-radius: 10px;
+            border-radius: 20px;
             overflow: hidden;
             box-shadow: var(--shadow-lg);
             transition: var(--transition);
-            aspect-ratio: 10/13;
+            aspect-ratio: 16/10;
             background: linear-gradient(135deg, rgba(0, 217, 255, 0.1) 0%, rgba(0, 255, 136, 0.1) 100%);
             border: 1px solid rgba(0, 217, 255, 0.2);
             display: flex;
@@ -600,7 +600,7 @@
 
         .showcase-content p {
             color: var(--text-secondary);
-            margin-bottom: 1.2rem;
+            margin-bottom: 1.5rem;
             line-height: 1.9;
             font-size: 1.1rem;
         }
@@ -626,7 +626,7 @@
         }
 
         .showcase-list li::before {
-            content: '✨';
+            content: '✓';
             color: var(--accent-secondary);
             font-weight: bold;
             font-size: 1.4rem;
@@ -951,7 +951,321 @@
       </div>
   </section>
 
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scrolling Image Showcase</title>
+  <style>
+      * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+      }
 
+      body {
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+          background: #0d0d0d;
+          color: #ffffff;
+          line-height: 1.6;
+      }
+
+      /* Image Showcase Section */
+      .image-showcase {
+          padding: 8rem 3rem;
+          position: relative;
+          overflow: hidden;
+      }
+
+      .showcase-header {
+          text-align: center;
+          margin-bottom: 4rem;
+          animation: fadeInUp 0.8s ease;
+      }
+
+      .showcase-header h2 {
+          font-size: clamp(2.5rem, 5vw, 4rem);
+          margin-bottom: 1rem;
+          font-weight: 800;
+          background: linear-gradient(135deg, #00d9ff 0%, #00ff88 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+      }
+
+      .showcase-header p {
+          color: #a0a0a0;
+          font-size: 1.2rem;
+          max-width: 600px;
+          margin: 0 auto;
+      }
+
+      /* Scrolling Image Container */
+      .scroll-container {
+          position: relative;
+          max-width: 1400px;
+          margin: 0 auto;
+          perspective: 1000px;
+      }
+
+      .image-wrapper {
+          position: relative;
+          border-radius: 20px;
+          overflow: hidden;
+          box-shadow: 
+              0 20px 60px rgba(0, 217, 255, 0.2),
+              0 0 0 1px rgba(0, 217, 255, 0.1);
+          transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+          background: #1a1a1a;
+      }
+
+      .image-wrapper:hover {
+          transform: translateY(-10px) scale(1.01);
+          box-shadow: 
+              0 30px 80px rgba(0, 217, 255, 0.3),
+              0 0 0 1px rgba(0, 217, 255, 0.3);
+      }
+
+      /* Glowing border effect */
+      .image-wrapper::before {
+          content: '';
+          position: absolute;
+          top: -2px;
+          left: -2px;
+          right: -2px;
+          bottom: -2px;
+          background: linear-gradient(135deg, #00d9ff, #00ff88, #00d9ff);
+          border-radius: 20px;
+          opacity: 0;
+          transition: opacity 0.6s ease;
+          z-index: -1;
+          filter: blur(10px);
+      }
+
+      .image-wrapper:hover::before {
+          opacity: 0.6;
+      }
+
+      /* Image styling */
+      .showcase-image {
+          width: 100%;
+          height: auto;
+          display: block;
+          border-radius: 20px;
+          transition: transform 0.6s ease;
+      }
+
+      .image-wrapper:hover .showcase-image {
+          transform: scale(1.02);
+      }
+
+      /* Loading placeholder */
+      .image-placeholder {
+          width: 100%;
+          aspect-ratio: 16/10;
+          background: linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(0, 255, 136, 0.1));
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 4rem;
+          border-radius: 20px;
+          animation: pulse 2s ease-in-out infinite;
+      }
+
+      @keyframes pulse {
+          0%, 100% { opacity: 0.5; }
+          50% { opacity: 0.8; }
+      }
+
+      /* Image caption/overlay */
+      .image-caption {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          padding: 2rem;
+          background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+          transform: translateY(100%);
+          transition: transform 0.4s ease;
+      }
+
+      .image-wrapper:hover .image-caption {
+          transform: translateY(0);
+      }
+
+      .image-caption h3 {
+          font-size: 1.5rem;
+          margin-bottom: 0.5rem;
+          color: #ffffff;
+      }
+
+      .image-caption p {
+          color: #a0a0a0;
+          font-size: 1rem;
+      }
+
+      /* Fade in animation */
+      @keyframes fadeInUp {
+          from {
+              opacity: 0;
+              transform: translateY(40px);
+          }
+          to {
+              opacity: 1;
+              transform: translateY(0);
+          }
+      }
+
+      .fade-in {
+          opacity: 0;
+          transform: translateY(40px);
+          transition: opacity 0.8s ease, transform 0.8s ease;
+      }
+
+      .fade-in.visible {
+          opacity: 1;
+          transform: translateY(0);
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+          .image-showcase {
+              padding: 4rem 1.5rem;
+          }
+
+          .showcase-header h2 {
+              font-size: 2.5rem;
+          }
+
+          .image-caption {
+              padding: 1.5rem;
+          }
+
+          .image-caption h3 {
+              font-size: 1.2rem;
+          }
+      }
+
+      /* Multiple images grid (optional) */
+      .images-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+          gap: 3rem;
+          max-width: 1400px;
+          margin: 0 auto;
+      }
+
+      @media (max-width: 768px) {
+          .images-grid {
+              grid-template-columns: 1fr;
+              gap: 2rem;
+          }
+      }
+  </style>
+</head>
+<body>
+  <!-- Single Image Showcase -->
+  <section class="image-showcase">
+      <div class="showcase-header">
+          <h2>See It In Action</h2>
+          <p>Experience the clean, modern interface designed for developers</p>
+      </div>
+
+      <div class="scroll-container fade-in">
+          <div class="image-wrapper">
+              <!-- REPLACE THIS URL WITH YOUR IMAGE -->
+              <img 
+                  src="YOUR_IMAGE_URL_HERE" 
+                  alt="BinaryFetch Screenshot" 
+                  class="showcase-image"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+              >
+              <!-- Placeholder shown if image fails to load -->
+              <div class="image-placeholder" style="display: none;">
+                  🖼️
+              </div>
+              
+              <!-- Optional: Caption overlay on hover -->
+              <div class="image-caption">
+                  <h3>BinaryFetch Interface</h3>
+                  <p>Clean, customizable, and powerful system information at your fingertips</p>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <!-- Optional: Multiple Images Grid -->
+  <!-- Uncomment this section if you want to show multiple images -->
+  <!--
+  <section class="image-showcase">
+      <div class="showcase-header">
+          <h2>Gallery</h2>
+          <p>Explore different configurations and themes</p>
+      </div>
+
+      <div class="images-grid">
+          <div class="image-wrapper fade-in">
+              <img src="YOUR_IMAGE_URL_1" alt="Screenshot 1" class="showcase-image">
+              <div class="image-caption">
+                  <h3>Default Theme</h3>
+                  <p>Out of the box experience</p>
+              </div>
+          </div>
+
+          <div class="image-wrapper fade-in">
+              <img src="YOUR_IMAGE_URL_2" alt="Screenshot 2" class="showcase-image">
+              <div class="image-caption">
+                  <h3>Custom Configuration</h3>
+                  <p>Fully personalized setup</p>
+              </div>
+          </div>
+
+          <div class="image-wrapper fade-in">
+              <img src="YOUR_IMAGE_URL_3" alt="Screenshot 3" class="showcase-image">
+              <div class="image-caption">
+                  <h3>Compact Mode</h3>
+                  <p>Minimal information display</p>
+              </div>
+          </div>
+      </div>
+  </section>
+  -->
+
+  <script>
+      // Intersection Observer for fade-in animations
+      const observerOptions = {
+          threshold: 0.1,
+          rootMargin: '0px 0px -100px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                  entry.target.classList.add('visible');
+              }
+          });
+      }, observerOptions);
+
+      // Observe all fade-in elements
+      document.querySelectorAll('.fade-in').forEach(el => {
+          observer.observe(el);
+      });
+
+      // Add parallax scroll effect (optional)
+      window.addEventListener('scroll', () => {
+          const scrolled = window.pageYOffset;
+          const images = document.querySelectorAll('.image-wrapper');
+          
+          images.forEach((img, index) => {
+              const rect = img.getBoundingClientRect();
+              const scrollPercent = (window.innerHeight - rect.top) / window.innerHeight;
+              
+              if (scrollPercent > 0 && scrollPercent < 1) {
+                  const translateY = (scrollPercent - 0.5) * 20;
+                  img.style.transform = `translateY(${translateY}px)`;
+              }
+          });
+      });
+  </script>
+</body>
         
         <!-- ==========================================
              SHOWCASE SECTION
